@@ -11,7 +11,9 @@ import (
 )
 
 func init() {
-	admin.RegisterViewPath("github.com/qor/location/views")
+	qor.IfDev(func() {
+		admin.RegisterViewPath("github.com/qor/location/views")
+	})
 }
 
 var GoogleAPIKey string
@@ -53,7 +55,7 @@ func (*Location) ConfigureQorResource(res resource.Resourcer) {
 			return fmt.Sprint(strings.TrimSuffix(str, suffix), newSuffix)
 		})
 
-		scope := Admin.Config.DB.NewScope(res.Value)
+		scope := qor.FakeDB.NewScope(res.Value)
 		if field, ok := scope.GetModelStruct().ModelType.FieldByName("Location"); ok {
 			labelName := field.Name
 			if customName, ok := utils.ParseTagOption(field.Tag.Get("location"))["NAME"]; ok {
