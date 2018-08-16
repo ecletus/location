@@ -4,16 +4,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/qor/admin"
-	"github.com/qor/qor"
-	"github.com/qor/qor/resource"
-	"github.com/qor/qor/utils"
+	"github.com/aghape/admin"
+	"github.com/aghape/aghape"
+	"github.com/aghape/aghape/resource"
+	"github.com/aghape/aghape/utils"
 )
 
-func init() {
-	qor.IfDev(func() {
-		admin.RegisterViewPath("github.com/qor/location/views")
-	})
+type Plugin struct {
 }
 
 var GoogleAPIKey string

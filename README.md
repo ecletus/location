@@ -1,6 +1,6 @@
 # Location
 
-Location picks up location details from an interactive Google Map widget when creating/editing any applicable Resource in [Qor Admin](http://github.com/qor/qor).
+Location picks up location details from an interactive Google Map widget when creating/editing any applicable Resource in [Qor Admin](http://github.com/aghape/qor).
 
 ## Documentation
 
