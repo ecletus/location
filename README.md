@@ -8,4 +8,4 @@ Location picks up location details from an interactive Google Map widget when cr
 
 # License
 
-Released under the [MIT License](https://github.com/jinzhu/gorm/blob/master/License).
+Released under the [MIT License](https://github.com/moisespsena-go/aorm/blob/master/License).
