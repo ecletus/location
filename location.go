@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/aghape/admin"
-	"github.com/aghape/aghape"
-	"github.com/aghape/aghape/resource"
-	"github.com/aghape/aghape/utils"
+	"github.com/aghape/core"
+	"github.com/aghape/core/resource"
+	"github.com/aghape/core/utils"
 )
 
 type Plugin struct {
@@ -52,7 +52,7 @@ func (*Location) ConfigureQorResource(res resource.Resourcer) {
 			return fmt.Sprint(strings.TrimSuffix(str, suffix), newSuffix)
 		})
 
-		scope := qor.FakeDB.NewScope(res.Value)
+		scope := core.FakeDB.NewScope(res.Value)
 		if field, ok := scope.GetModelStruct().ModelType.FieldByName("Location"); ok {
 			labelName := field.Name
 			if customName, ok := utils.ParseTagOption(field.Tag.Get("location"))["NAME"]; ok {
@@ -60,7 +60,7 @@ func (*Location) ConfigureQorResource(res resource.Resourcer) {
 			}
 
 			if res.GetMeta(field.Name) == nil {
-				res.Meta(&admin.Meta{Name: field.Name, Label: labelName, Type: "location", Config: &LocationConfig{GoogleAPIKey: GoogleAPIKey}, Valuer: func(resource interface{}, ctx *qor.Context) interface{} {
+				res.Meta(&admin.Meta{Name: field.Name, Label: labelName, Type: "location", Config: &LocationConfig{GoogleAPIKey: GoogleAPIKey}, Valuer: func(resource interface{}, ctx *core.Context) interface{} {
 					return resource.(locationInterface).GetLocation()
 				}})
 				res.IndexAttrs(res.IndexAttrs(), "-"+field.Name, "-Latitude", "-Longitude")
