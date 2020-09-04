@@ -42,8 +42,8 @@ func (location *Location) GetLocation() *Location {
 	return location
 }
 
-// ConfigureQorResource configure qor locale for Qor Admin
-func (*Location) ConfigureQorResource(res resource.Resourcer) {
+// ConfigureResource configure qor locale for Admin
+func (*Location) ConfigureResource(res resource.Resourcer) {
 	if res, ok := res.(*admin.Resource); ok {
 		Admin := res.GetAdmin()
 		res.UseTheme("location")
@@ -52,8 +52,7 @@ func (*Location) ConfigureQorResource(res resource.Resourcer) {
 			return fmt.Sprint(strings.TrimSuffix(str, suffix), newSuffix)
 		})
 
-		scope := res.FakeScope
-		if field, ok := scope.GetModelStruct().ModelType.FieldByName("Location"); ok {
+		if field, ok := res.ModelStruct.FieldsByName["Location"]; ok {
 			labelName := field.Name
 			if customName, ok := utils.ParseTagOption(field.Tag.Get("location"))["NAME"]; ok {
 				labelName = customName
